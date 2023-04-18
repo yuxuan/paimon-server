@@ -8,6 +8,8 @@ export https_proxy=http://proxy.npm.baidu-int.com:8269
 
 rm -rf dist output
 
+pnpm install
+
 NODE_ENV=production pnpm run build
 
 mkdir output
