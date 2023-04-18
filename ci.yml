@@ -12,6 +12,7 @@ Profiles:
       image: DECK_CENTOS7U5_K3
       tools:
         - nodejs: 18.3.0
+        - pnpm: 8.0.0
     check:
       - reuse: TASK
         enable: true

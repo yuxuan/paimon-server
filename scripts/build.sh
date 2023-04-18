@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 
 echo "node: $(node -v)"
-echo "npm: $(npm -v)"
+echo "pnpm: $(pnpm -v)"
 
-npm install
+export http_proxy=http://proxy.npm.baidu-int.com:8269
+export https_proxy=http://proxy.npm.baidu-int.com:8269
 
-NODE_ENV=production npm run build
+rm -rf dist output
+
+NODE_ENV=production pnpm run build
+
+mkdir output
+cp -r dist prisma node_modules output
+
+echo "build success"
