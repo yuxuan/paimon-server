@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:root123123@127.0.0.1:3306/chatbot"
+}
+
+enum Role {
+  USER
+  ASSISTANT
+}
+
+model Application {
+  id Int @default(autoincrement()) @id
+  applicationId String @db.Char(36) @unique
+  accessToken String
+  type String @default("")
+  description String @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  conversions Conversation[]
+}
+
+model Conversation {
+  id Int @default(autoincrement()) @id
+  conversationId String @db.Char(36) @unique
+  prompt String @default("")
+  user String @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  application Application @relation(fields: [applicationId], references: [applicationId])
+  applicationId String
+}
+
+model Message {
+  id Int @default(autoincrement()) @id
+  messageId String @db.Char(36) @unique
+  content String @db.LongText
+  role Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  conversationId String
+}
