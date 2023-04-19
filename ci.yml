@@ -25,5 +25,23 @@ Profiles:
     #     enable: true
     #     paths:
     #       - node_modules
+    imageBuild:                                           # 镜像构建相关配置
+      images:
+        - dockerfile: Dockerfile           # (必填) Dockerfile 相对代码库根目录的相对路径
+          repository: iregistry.baidu-int.com/inf-fe/icloud-ai-server     # (必填) 镜像仓库项目地址
+          # 镜像版本命名策略，在流水线发布阶段可修改为最终正式版本，支持如下两种：
+          # 2. TIMESTAMP_BRANCH_COMMIT_ID: 默认策略，时间戳-分支名-commit ID，如20210815162319-master-a3b2def
+          # 1. TIMESTAMP_COMMIT_ID：时间戳-commit ID，如20210815162319-a3b2def
+          tagStrategy: TIMESTAMP_BRANCH_COMMIT_ID         # (选填) 镜像tag命名策略
+          context: .                                      # (选填) 镜像构建时的上下文，默认是代码库根目录，也可指定其他相对代码库根目录的相对路径
+          # 基础镜像拉取策略，支持如下两种：
+          # 1. IfNotPresent: 默认策略，当不存在基础镜像时拉取
+          # 2. Always: 不管本地有没有基础镜像，都会重新拉取镜像仓库的最新基础镜像
+          imagePullStrategy: IfNotPresent                 # (选填) 基础镜像拉取策略
+          enableDockerBuildkit: true                      # (选填) 构建镜像时是否开启DOCKER_BUILDKIT，默认开启，可使用该字段关闭
+          enableBaseImageCache: true                      # (选填) 是否缓存Dockerfile的基础镜像，默认开启，可使用该字段关闭
+          enableImageLayerCache: false                    # (选填) 是否缓存镜像层，默认关闭，可使用该字段开启
+          push: true                                      # (选填) 构建完成后是否推送镜像到镜像仓库，默认开启，可使用该字段关闭
+      imageCacheTrimThresholdSize: 10
     artifacts:
       release: true
