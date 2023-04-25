@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:root123123@127.0.0.1:3306/chatbot"
+  url      = "mysql://root:NtFKr&05!d82@10.24.21.73:8306/chatbot"
 }
 
 enum Role {
