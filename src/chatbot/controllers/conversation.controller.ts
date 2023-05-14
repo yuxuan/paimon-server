@@ -46,7 +46,6 @@ export class ConversationController {
         const created = await this.conversationService.createConversation(
             payload,
         );
-        console.log(44, created);
         return {
             data: created,
         };

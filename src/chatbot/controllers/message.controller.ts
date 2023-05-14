@@ -28,7 +28,6 @@ export class MessageController {
     @Post()
     async createMessage(@Body() createMessageDto: CreateMessageDto) {
         const messageId = uuidv4();
-        console.log(33, createMessageDto);
         const payload = {
             ...createMessageDto,
             messageId,
