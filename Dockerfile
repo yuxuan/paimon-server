@@ -1,4 +1,4 @@
-FROM iregistry.baidu-int.com/hub-official/node:16
+FROM iregistry.baidu-int.com/hub-official/node:18
 ENV TZ "Asia/Shanghai"
 ENV NODE_ENV production
 ENV PORT 8080
